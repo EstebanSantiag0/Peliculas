@@ -1,0 +1,461 @@
+/* ==========================================================================
+   CineClásico — hoja de estilos
+   Paleta: sala de cine a oscuras, terciopelo del telón y bombillas de marquesina.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Hanken+Grotesk:wght@400;500;600&display=swap");
+
+:root {
+    --ink: #14111b;        /* sala a oscuras */
+    --panel: #1d1926;      /* butaca */
+    --line: #37303f;       /* filo entre superficies */
+    --curtain: #7a1528;    /* terciopelo del telón */
+    --bulb: #f0b84b;       /* bombilla de marquesina */
+    --silver: #e2dfd8;     /* pantalla plateada */
+    --smoke: #a39cab;      /* texto secundario */
+
+    --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+    --text: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    --page: min(100% - 2.5rem, 75rem);
+
+    /* Bootstrap toma sus colores de aquí */
+    --bs-bg-body: var(--ink);
+    --bs-fg-body: var(--silver);
+    --bs-bg-1: var(--panel);
+    --bs-fg-2: var(--smoke);
+    --bs-border-color: var(--line);
+    --bs-body-font-family: var(--text);
+    --bs-primary-fg: var(--bulb);
+    --bs-warning-fg: var(--bulb);
+    --bs-success-fg: #a9c7b2;
+    --bs-danger-fg: #e58a97;
+    --bs-link-color: var(--bulb);
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+}
+
+body {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+}
+
+::selection {
+    background: var(--bulb);
+    color: var(--ink);
+}
+
+:focus-visible {
+    outline: 2px solid var(--bulb);
+    outline-offset: 3px;
+}
+
+/* Ancho de página compartido por cabecera, portada, contenido y pie */
+#site-header > .container-fluid,
+.hero-content,
+main.container,
+.footer-content {
+    width: var(--page);
+    max-width: none;
+    margin-inline: auto;
+    padding-inline: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Cabecera
+   -------------------------------------------------------------------------- */
+#site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in oklch, var(--ink) 86%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+}
+
+#site-header .navbar-brand {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+    color: var(--silver);
+}
+
+#site-header .nav-link.active {
+    color: var(--bulb);
+}
+
+#site-header .form-control {
+    background-color: var(--panel);
+    border-color: var(--line);
+    color: var(--silver);
+}
+
+#site-header .form-control::placeholder {
+    color: var(--smoke);
+}
+
+#site-header .btn-icon.theme-secondary {
+    --bs-theme-bg: var(--bulb);
+    --bs-theme-contrast: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   Portada: la ciudad de Metrópolis proyectada al fondo de la sala
+   -------------------------------------------------------------------------- */
+#hero {
+    position: relative;
+    isolation: isolate;
+    max-width: none;
+    padding: 0;
+    overflow: hidden;
+    background: var(--ink) url("images/hero-metropolis.jpg") no-repeat right top 22% / min(52rem, 54%) auto;
+    border-bottom: 1px solid var(--line);
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(90deg, var(--ink) max(46%, 100% - 52rem), color-mix(in oklch, var(--ink) 50%, transparent) 78%, color-mix(in oklch, var(--curtain) 45%, transparent) 100%),
+        linear-gradient(0deg, var(--ink) 0%, transparent 35%),
+        color-mix(in oklch, var(--ink) 30%, transparent);
+}
+
+.hero-content {
+    display: grid;
+    justify-items: start;
+    gap: 1.25rem;
+    padding-block: clamp(4rem, 12vw, 9rem);
+}
+
+.hero-content > * {
+    margin: 0;
+    max-width: 38rem;
+}
+
+.hero-tag {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--bulb);
+}
+
+.hero-title {
+    max-width: 13ch;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(2.75rem, 7.2vw, 5.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+}
+
+.hero-subtitle {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    line-height: 1.4;
+}
+
+.hero-description {
+    color: var(--smoke);
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   Botones propios
+   -------------------------------------------------------------------------- */
+.btn-primary,
+.btn-outline,
+.btn-card {
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.btn-large {
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: var(--bulb);
+    color: var(--ink);
+}
+
+.btn-primary:hover {
+    background: #f7cd78;
+    color: var(--ink);
+}
+
+.btn-outline {
+    border-color: color-mix(in oklch, var(--silver) 45%, transparent);
+    color: var(--silver);
+}
+
+.btn-outline:hover {
+    border-color: var(--silver);
+    background: color-mix(in oklch, var(--silver) 10%, transparent);
+    color: var(--silver);
+}
+
+.btn-card {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.875rem;
+    border-color: var(--line);
+    color: var(--silver);
+}
+
+.btn-card:hover {
+    border-color: var(--bulb);
+    color: var(--bulb);
+}
+
+/* --------------------------------------------------------------------------
+   Catálogo
+   -------------------------------------------------------------------------- */
+main.container {
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+.section-title {
+    margin: 0 0 0.5rem;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+}
+
+.tagline {
+    margin: 0 0 1rem;
+    color: var(--smoke);
+}
+
+#catalog .card {
+    --bs-card-bg: var(--panel);
+    --bs-card-border-color: var(--line);
+    --bs-card-border-radius: 3px;
+    --bs-card-spacer-x: 1.375rem;
+    --bs-card-spacer-y: 1.375rem;
+    --bs-card-cap-bg: transparent;
+    --bs-card-cap-padding-x: 1.375rem;
+    --bs-card-cap-padding-y: 0.875rem;
+    --bs-card-body-gap: 0.625rem;
+    overflow: hidden;
+}
+
+/* Todas las imágenes se recortaron a 4:5; object-fit protege el encuadre */
+#catalog .card-img-top {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-bottom: 1px solid var(--line);
+}
+
+#catalog .card-title {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.75rem;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--silver);
+}
+
+#catalog .card-text {
+    margin: 0;
+}
+
+/* Renglón de género y calificación */
+#catalog div.card-text {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+}
+
+#catalog .fg-warning {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* Dirección */
+#catalog p.card-text:has(strong) {
+    font-size: 0.9375rem;
+    color: var(--smoke);
+}
+
+#catalog p.card-text strong {
+    font-weight: 600;
+    color: var(--silver);
+}
+
+/* Sinopsis */
+#catalog p.card-text:last-child {
+    font-size: 0.9688rem;
+    color: color-mix(in oklch, var(--silver) 82%, var(--ink));
+}
+
+/* La etiqueta sube a la esquina de la imagen */
+.card-badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 2px;
+    background: color-mix(in oklch, var(--ink) 88%, transparent);
+    backdrop-filter: blur(6px);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--silver);
+}
+
+#catalog .card-footer {
+    align-items: center;
+    font-size: 0.9375rem;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Destacadas: filo de telón arriba y título en ámbar */
+.featured .card {
+    box-shadow: inset 0 3px 0 var(--curtain);
+    border-color: color-mix(in oklch, var(--bulb) 38%, var(--line));
+}
+
+#catalog .featured .card-title {
+    color: var(--bulb);
+}
+
+.featured .card-badge {
+    background: var(--curtain);
+}
+
+#catalog article[hidden] {
+    display: none;
+}
+
+.catalog-empty {
+    margin: 0;
+    padding: 2rem 0;
+    color: var(--smoke);
+}
+
+.catalog-empty button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--bulb);
+    text-decoration: underline;
+    font: inherit;
+    cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   Sobre el archivo y créditos
+   -------------------------------------------------------------------------- */
+#about {
+    margin-top: clamp(4rem, 9vw, 7rem);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--line);
+}
+
+#about p {
+    max-width: 44rem;
+}
+
+.credits {
+    max-width: 44rem;
+    margin-top: 2rem;
+    font-size: 0.9375rem;
+    color: var(--smoke);
+}
+
+.credits summary {
+    width: fit-content;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--silver);
+}
+
+.credits ul {
+    margin: 0.75rem 0 0;
+    padding-left: 1.1rem;
+}
+
+.credits li + li {
+    margin-top: 0.3rem;
+}
+
+/* --------------------------------------------------------------------------
+   Pie
+   -------------------------------------------------------------------------- */
+#site-footer {
+    border-top: 1px solid var(--line);
+    background: var(--panel);
+    font-size: 0.9375rem;
+    color: var(--smoke);
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-block: 1.75rem;
+}
+
+.footer-content p {
+    margin: 0;
+}
+
+.footer-links a {
+    color: var(--silver);
+    text-underline-offset: 3px;
+}
+
+.footer-links a:hover {
+    color: var(--bulb);
+}
+
+/* --------------------------------------------------------------------------
+   Pantallas chicas
+   -------------------------------------------------------------------------- */
+@media (max-width: 47.99rem) {
+    #hero {
+        background-position: right -6rem top;
+        background-size: 34rem auto;
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(90deg, var(--ink) 8%, color-mix(in oklch, var(--ink) 72%, transparent) 100%),
+            linear-gradient(0deg, var(--ink) 0%, transparent 45%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    * {
+        transition: none !important;
+    }
+}
